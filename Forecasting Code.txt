@@ -1,0 +1,29 @@
+## Install Forecast Package
+install.pacakges('fpp')
+library(fpp)
+
+data(ausair)
+air <- window(ausair,start=1990,end=2004)
+plot(air,ylab="Airline Passengers", xlab="Year")
+
+## SES Method - Alpha =0.2 
+fit1 <- ses(air, alpha=0.2, initial="simple", h=3)
+## change alpha to 0.6
+fit2 <- ses(air, alpha=0.6, initial="simple", h=3)
+## Use all Default VAlues
+fit3 <- ses(air,h=3)
+## Now Plot SES trends on existing graph
+plot(fit1, PI=FALSE, ylab="Airline Passengers", xlab="Year", main="", fcol="White", type="o")
+lines(fitted(fit1), col="blue", type="o")
+lines(fitted(fit2), col="red", type="o")
+lines(fitted(fit3), col="green", type="o")
+lines(fit1$mean, col="blue", type="o")
+lines(fit2$mean, col="red", type="o")
+lines(fit3$mean, col="green", type="o")
+## Green Line - 0.9 alpha seems to capture the trend the best
+## Add a Legend
+legend("topleft", lty=1, col=c(1, "blue", "red", "green"), c("data", expressions(alpha==0.2), 
+expressions(alpha==0.6), expressions(alpha==0.89)),pch=1)
+
+cargroup	gender	english	reading	mechanic	abstract	math	office
+
